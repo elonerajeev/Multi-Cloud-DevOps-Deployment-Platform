@@ -1,0 +1,49 @@
+# System Files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfplan
+.terraform.lock.hcl
+
+# SSH Keys
+*.pem
+*.key
+*.pub
+id_rsa
+
+# Kubernetes
+k8s/secret.yaml
+kubeconfig
+*.kubeconfig
+
+# IDEs
+.vscode/
+.idea/
+
+# AWS Credentials
+.aws/
+credentials
+config
+
+# Logs
+*.log
+logs/
+
+# Deployment Guide (may contain sensitive info)
+DEPLOYMENT_GUIDE.txt
