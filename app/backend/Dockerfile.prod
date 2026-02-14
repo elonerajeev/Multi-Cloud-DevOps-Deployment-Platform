@@ -1,0 +1,36 @@
+# Multi-Build Dockerfile for production 
+
+         # STAGE: 1
+FROM node:20-alpine AS builder
+
+WORKDIR /app/backend/prod
+
+COPY package*.json ./
+
+RUN npm install --production 
+
+COPY . .
+
+      # STAGE: 2
+FROM node:20-alpine
+
+WORKDIR /app/backend/prod
+
+ENV NODE_ENV=production
+
+COPY --from=builder /app/backend/prod/package*.json ./
+COPY --from=builder /app/backend/prod/node_modules ./node_modules
+COPY --from=builder /app/backend/prod/index.js ./index.js
+COPY --from=builder /app/backend/prod/routes ./routes
+COPY --from=builder /app/backend/prod/controller ./controller
+COPY --from=builder /app/backend/prod/models ./models
+COPY --from=builder /app/backend/prod/middleware ./middleware
+COPY --from=builder /app/backend/prod/config ./config
+COPY --from=builder /app/backend/prod/helpers ./helpers
+
+EXPOSE 5000
+
+CMD ["node", "index.js"]
+
+
+

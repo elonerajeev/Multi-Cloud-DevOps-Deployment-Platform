@@ -1,0 +1,24 @@
+#Dockerfile for production with multi stage build
+
+    # STAGE: 1
+FROM node:20-alpine AS builder
+
+WORKDIR /app/frontend/prod
+
+COPY package*.json ./
+
+RUN npm config set registry https://registry.npmjs.org/
+RUN npm ci --fetch-timeout=600000
+
+COPY . .
+
+RUN npm run build
+
+    # STAGE: 2
+FROM nginx:alpine
+
+COPY --from=builder /app/frontend/prod/build /user/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
