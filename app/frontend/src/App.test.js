@@ -1,10 +1,9 @@
+import './testMockFetch'; // Must run first so fetch is mocked before App loads
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import { store } from './store/store';
-
-// fetch is mocked in setupTests.js
 
 test('renders app without crashing', () => {
   render(
