@@ -27,7 +27,6 @@ A production-ready, enterprise-grade e-commerce application with automated CI/CD
 - [Cost Estimation](#-cost-estimation)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
-- **[How to create dev branch & open PR](HOW-TO-DEV-BRANCH-AND-PR.md)** (step-by-step)
 
 ---
 
