@@ -13,7 +13,7 @@ variable "cidr_block" {
 variable "ami_id" {
   description = "AMI ID for EC2 instance (Amazon Linux 2 us-east-1)"
   type        = string
-  default     = "ami-0f58b397bc5c1f2e8"
+  default     = "ami-0c1fe732b5494dc14"
 }
 
 variable "instance_type" {
@@ -25,7 +25,7 @@ variable "instance_type" {
 variable "key_name" {
   description = "SSH key pair name for EC2 access"
   type        = string
-  default     = "prod-key"
+  default     = "devops-key"
 }
 
 variable "environment" {
@@ -67,7 +67,7 @@ variable "eks_cluster_version" {
 variable "eks_node_instance_type" {
   description = "EC2 instance type for EKS worker nodes"
   type        = string
-  default     = "t3.medium"
+  default     = "t2.micro"
 }
 
 variable "eks_node_desired_size" {

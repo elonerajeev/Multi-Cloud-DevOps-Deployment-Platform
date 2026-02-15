@@ -8,17 +8,23 @@
 set -e
 
 REGION="us-east-1"
-BUCKET_NAME="rajeev-terraform-state-bucket-12345"
+BUCKET_NAME="rajeev-terraform-state-$(date +%s)-$(openssl rand -hex 4)"
 DYNAMODB_TABLE="terraform-lock-table"
 
 echo "🚀 Setting up Terraform backend..."
 
 # Create S3 bucket
 echo "📦 Creating S3 bucket: $BUCKET_NAME"
-aws s3api create-bucket \
-  --bucket "$BUCKET_NAME" \
-  --region "$REGION" \
-  --create-bucket-configuration LocationConstraint="$REGION" 2>/dev/null || echo "Bucket already exists"
+if [ "$REGION" = "us-east-1" ]; then
+  aws s3api create-bucket \
+    --bucket "$BUCKET_NAME" \
+    --region "$REGION"
+else
+  aws s3api create-bucket \
+    --bucket "$BUCKET_NAME" \
+    --region "$REGION" \
+    --create-bucket-configuration LocationConstraint="$REGION"
+fi
 
 # Enable versioning
 echo "🔄 Enabling versioning..."

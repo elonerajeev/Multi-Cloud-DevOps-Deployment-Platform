@@ -17,7 +17,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "rajeev-terraform-state-bucket-12345"
+    bucket         = "rajeev-terraform-state-1771131682-396ee83a"
     key            = "prod/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "terraform-lock-table"
