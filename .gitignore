@@ -40,6 +40,9 @@ kubeconfig
 .aws/
 credentials
 config
+# Allow backend app config (db etc.)
+!app/backend/config
+!app/backend/config/**
 
 # Logs
 *.log
