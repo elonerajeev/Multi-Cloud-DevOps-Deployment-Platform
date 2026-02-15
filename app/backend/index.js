@@ -32,6 +32,21 @@ app.get('/', (req, res) => {
     res.send('Successfully Back-End Code Is Running.....');
 });
 
+// Health endpoints for Kubernetes probes and load balancers
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+app.get('/ready', (req, res) => {
+    const mongoose = require('mongoose');
+    const isDbConnected = mongoose.connection.readyState === 1;
+    if (isDbConnected) {
+        res.status(200).json({ status: 'ready', db: 'connected' });
+    } else {
+        res.status(503).json({ status: 'not ready', db: mongoose.connection.readyState });
+    }
+});
+
 // Port configuration
 const PORT = process.env.PORT || 5000;
 

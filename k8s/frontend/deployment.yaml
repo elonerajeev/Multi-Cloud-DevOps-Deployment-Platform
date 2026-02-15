@@ -23,6 +23,11 @@ spec:
         app: frontend
         tier: frontend
     spec:
+      securityContext:
+        runAsNonRoot: false
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: frontend
         image: 252979663162.dkr.ecr.us-east-1.amazonaws.com/shop-app-frontend:latest

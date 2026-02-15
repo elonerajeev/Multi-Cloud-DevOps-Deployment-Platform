@@ -109,12 +109,22 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                sh '''
-                echo "Waiting for services to be ready..."
-                sleep 30
-                kubectl get pods -n shop
-                kubectl get svc -n shop
-                '''
+                script {
+                    sh '''
+                    echo "Waiting for rollout..."
+                    kubectl rollout status deployment/backend -n shop --timeout=5m
+                    kubectl rollout status deployment/frontend -n shop --timeout=5m
+                    echo "Waiting for LoadBalancer..."
+                    sleep 45
+                    BACKEND_HOST=$(kubectl get svc backend -n shop -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' 2>/dev/null || true)
+                    if [ -n "$BACKEND_HOST" ]; then
+                      echo "Checking backend /health..."
+                      curl -sf "http://$BACKEND_HOST:5000/health" || true
+                    fi
+                    kubectl get pods -n shop
+                    kubectl get svc -n shop
+                    '''
+                }
             }
         }
 
@@ -196,8 +206,15 @@ pipeline {
             }
         }
         failure {
-            echo "❌ Pipeline Failed!"
-            sh 'kubectl get events -n shop --sort-by=.lastTimestamp | tail -20'
+            echo "❌ Pipeline Failed! Attempting rollback..."
+            script {
+                sh '''
+                kubectl rollout undo deployment/backend -n shop --to-revision=0 2>/dev/null || true
+                kubectl rollout undo deployment/frontend -n shop --to-revision=0 2>/dev/null || true
+                echo "Recent events:"
+                kubectl get events -n shop --sort-by=.lastTimestamp | tail -25
+                '''
+            }
         }
         always {
             sh 'docker system prune -f'

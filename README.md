@@ -27,6 +27,7 @@ A production-ready, enterprise-grade e-commerce application with automated CI/CD
 - [Cost Estimation](#-cost-estimation)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
+- **[How to create dev branch & open PR](HOW-TO-DEV-BRANCH-AND-PR.md)** (step-by-step)
 
 ---
 
@@ -175,6 +176,7 @@ Multi-Cloud-DevOps-Deployment-Platform/
 │   ├── configmap.yaml            # Configuration
 │   ├── secret.yaml               # Secrets (template)
 │   ├── ingress.yaml              # Ingress rules
+│   ├── network-policy.yaml       # Pod-to-pod traffic restrictions
 │   │
 │   ├── backend/                  # Backend K8s resources
 │   │   ├── deployment.yaml       # Deployment spec
@@ -194,8 +196,10 @@ Multi-Cloud-DevOps-Deployment-Platform/
 ├── scripts/                      # Automation Scripts
 │   ├── setup-terraform-backend.sh
 │
+├── .github/workflows/ci.yml      # GitHub Actions CI (build, test, Docker)
+├── docker-compose.yml            # Local dev: backend + frontend + MongoDB
 ├── Jenkinsfile                   # AWS CI/CD Pipeline
-├── Jenkinsfile.azure             # Azure CI/CD Pipeline (NEW!)
+├── Jenkinsfile.azure             # Azure CI/CD Pipeline
 ├── Makefile                      # Task automation
 └── README.md                     # This file
 ```
@@ -203,6 +207,12 @@ Multi-Cloud-DevOps-Deployment-Platform/
 ---
 
 ## 🚀 Quick Start
+
+### Run locally with Docker Compose (no cloud required)
+```bash
+docker compose up --build
+# Frontend: http://localhost:3000  |  Backend: http://localhost:5000  |  Mongo: localhost:27017
+```
 
 ### Prerequisites
 
