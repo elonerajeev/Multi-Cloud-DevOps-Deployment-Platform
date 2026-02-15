@@ -134,6 +134,7 @@ k8s-deploy: ## Deploy application to Kubernetes
 	kubectl apply -f k8s/backend/
 	kubectl apply -f k8s/frontend/
 	kubectl apply -f k8s/ingress.yaml
+	kubectl apply -f k8s/network-policy.yaml
 
 k8s-status: ## Check Kubernetes deployment status
 	kubectl get pods -n shop

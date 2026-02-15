@@ -1,0 +1,28 @@
+# Network policies: restrict pod-to-pod traffic in the shop namespace
+# Requires CNI that supports NetworkPolicy (e.g. Calico, Cilium)
+# - Only frontend pods can talk to backend (plus external/ingress)
+# - Backend egress is unrestricted (MongoDB Atlas, DNS, etc.)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: shop-backend-ingress
+  namespace: shop
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: frontend
+      ports:
+        - protocol: TCP
+          port: 5000
+    - from:
+        - namespaceSelector: {}
+      ports:
+        - protocol: TCP
+          port: 5000
