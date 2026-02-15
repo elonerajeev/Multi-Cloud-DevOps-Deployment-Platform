@@ -98,24 +98,6 @@ A production-ready, enterprise-grade e-commerce application with automated CI/CD
 
 ## 🛠️ Tech Stack
 
-### Frontend
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| React | 18.2 | UI Framework |
-| Redux Toolkit | 2.2 | State Management |
-| React Router | 6 | Routing |
-| TailwindCSS | 3.4 | Styling |
-| Axios | Latest | HTTP Client |
-
-### Backend
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| Node.js | 18+ | Runtime |
-| Express | 4.18 | Web Framework |
-| MongoDB | 6+ | Database |
-| Mongoose | 8.6 | ODM |
-| JWT | 9.0 | Authentication |
-
 ### Infrastructure
 | Technology | Version | Purpose |
 |------------|---------|---------|
@@ -211,13 +193,10 @@ Multi-Cloud-DevOps-Deployment-Platform/
 │
 ├── scripts/                      # Automation Scripts
 │   ├── setup-terraform-backend.sh
-│   └── update-configmap.sh
 │
 ├── Jenkinsfile                   # AWS CI/CD Pipeline
 ├── Jenkinsfile.azure             # Azure CI/CD Pipeline (NEW!)
 ├── Makefile                      # Task automation
-├── DEPLOYMENT_GUIDE.txt          # Step-by-step deployment
-├── AZURE_DEPLOYMENT_GUIDE.md     # Azure-specific guide (NEW!)
 └── README.md                     # This file
 ```
 
@@ -262,15 +241,6 @@ key_name = "your-key-pair-name"     # Your AWS key pair
 ```
 
 ### 4️⃣ Deploy Infrastructure
-
-```bash
-# Deploy to dev environment
-make deploy-dev
-
-# Or manually
-cd infra/workspaces
-./deploy.sh dev apply
-```
 
 ### 5️⃣ Configure kubectl
 
@@ -675,19 +645,6 @@ dev = {
 - CloudWatch logs
 - Kubernetes audit logs
 - Prometheus metrics
-
-### Security Checklist
-
-- [ ] Rotate credentials regularly
-- [ ] Enable MFA on AWS account
-- [ ] Use AWS Secrets Manager for production
-- [ ] Review IAM policies
-- [ ] Enable CloudTrail
-- [ ] Configure network policies
-- [ ] Set up WAF (Web Application Firewall)
-- [ ] Enable encryption at rest
-- [ ] Regular security scans
-
 ---
 
 ## 💰 Cost Estimation
@@ -881,14 +838,6 @@ We welcome contributions! Here's how you can help:
    - Click "New Pull Request"
    - Describe your changes
 
-### Code Style
-
-- Use meaningful variable names
-- Add comments for complex logic
-- Follow Terraform best practices
-- Keep functions small and focused
-- Update documentation
-
 ---
 
 ## 📄 License
@@ -941,24 +890,6 @@ copyright notice and this permission notice appear in all copies.
 - [AZURE_DEPLOYMENT_GUIDE.md](AZURE_DEPLOYMENT_GUIDE.md) - Azure deployment guide
 - [infra/workspaces/README.md](infra/workspaces/README.md) - Multi-environment setup
 - [monitoring/README.md](monitoring/README.md) - Monitoring configuration
-
----
-
-## 🎯 Roadmap
-
-### Planned Features
-
-- [ ] **GCP Support** - Add Google Cloud Platform deployment
-- [ ] **Helm Charts** - Package application as Helm chart
-- [ ] **ArgoCD Integration** - GitOps with ArgoCD
-- [ ] **Service Mesh** - Istio integration
-- [ ] **Centralized Logging** - ELK/EFK stack
-- [ ] **Backup & Restore** - Velero integration
-- [ ] **Cost Optimization** - Automated cost analysis
-- [ ] **Multi-Region** - Deploy across multiple regions
-- [ ] **Blue-Green Deployment** - Zero-downtime strategy
-- [ ] **Canary Releases** - Gradual rollout
-
 ---
 
 ## ⭐ Star History

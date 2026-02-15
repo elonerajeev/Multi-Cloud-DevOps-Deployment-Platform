@@ -10,6 +10,6 @@
 
 5. start wokring on monitoring parts --->  complete
 
-6. now run the project and test everythink wokring correctly and expected ---> processing
+6. now run the project and test everythink wokring correctly and expected ---> Complete
 
-6. Now, it's complete just Documentation the things --->  
+6. Now, it's complete just Documentation the things --->  Done
